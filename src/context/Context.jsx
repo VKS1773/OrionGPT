@@ -26,10 +26,11 @@ const ContextProvider=(props)=>{
             setRecentPrompt(prompt)
         }
         else{
-            setPrevPrompts(prev=>[])
+            setPrevPrompts(prev=>[...prev,input])
+            setRecentPrompt(input)
+            response=await run(input);
+
         }
-        setRecentPrompt(input)
-        setPrevPrompts(prev=>[...prev,input])
         // const response=await run(input);
         let responseArray=response.split("**");
         let newResponse="";
@@ -51,9 +52,7 @@ const ContextProvider=(props)=>{
         }
         setLoading(false);
         setInput("");
-
     }
-
     // onSent("what is react.js?");
     const contextValue={
          prevPrompts,
